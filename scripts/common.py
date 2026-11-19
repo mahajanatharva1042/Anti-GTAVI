@@ -35,6 +35,8 @@ def ytdlp_base():
     import importlib.util
     exe = [sys.executable, "-m", "yt_dlp"] if importlib.util.find_spec("yt_dlp") else [tool("yt-dlp")]
     base = exe + ["--no-warnings", "--no-progress"]
+    if shutil.which("node"):
+        base += ["--js-runtimes", "node"]
     if sys.platform == "win32":
         base += ["--compat-options", "no-certifi"]  # use the Windows certificate store
     return base

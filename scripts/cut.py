@@ -206,6 +206,7 @@ def main():
     ap.add_argument("--captions", choices=["word", "bubble", "none"], default="word")
     ap.add_argument("--hook", default="")
     ap.add_argument("--allow-profanity", action="store_true", help="keep swear words in captions (slurs are always masked)")
+    ap.add_argument("--clean", action="store_true", help="delete heavy intermediate source/audio files after successful cut")
     ap.add_argument("--cam", default="auto", help="auto (find the webcam) or x:y:w:h fractions")
     ap.add_argument("--start", type=float); ap.add_argument("--end", type=float)
     a = ap.parse_args()
@@ -282,6 +283,9 @@ def main():
                                             "source_url": info.get("webpage_url"), "source_title": info.get("title"),
                                             "source_channel": info.get("channel") or info.get("uploader")})
     print(mp4)
+    if a.clean:
+        from clean import clean_job
+        clean_job(d)
 
 
 if __name__ == "__main__":

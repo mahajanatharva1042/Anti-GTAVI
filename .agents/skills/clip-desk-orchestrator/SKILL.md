@@ -109,3 +109,18 @@ Present the final package to the user in a single structured message:
 5. **Verification**: Confirm all automated checks passed.
 
 Wait for the human's explicit approval ("Yes") before marking the task complete. The human posts the clip manually.
+
+---
+
+### Stage 7: Cleanup & Disk Space Optimization
+Once clips are reviewed or posted, clean up intermediate files to prevent disk exhaustion:
+```bash
+# Clean heavy raw source video and temporary audio files while keeping final clip:
+python scripts/clean.py jobs/<id>
+
+# Or keep only a specific pick and delete other test cuts in edits/:
+python scripts/clean.py jobs/<id> --keep-pick <PICK_NUM>
+
+# Or purge all clips in edits/ after upload:
+python scripts/clean.py jobs/<id> --edits
+```

@@ -189,6 +189,13 @@ python scripts/live.py "https://www.youtube.com/watch?v=..." --minutes 60
 # 9. Log and track payouts
 python scripts/payouts.py add --platform tiktok --post-url "https://tiktok.com/@..." --views 25000 --rate-per-1k 1.0 --campaign "SummerGaming"
 python scripts/payouts.py report
+
+# 10. Reclaim disk space by cleaning intermediate files or old cuts
+python scripts/clean.py jobs/<job_id>               # Deletes raw source video, audio waveforms & .ass files
+python scripts/clean.py jobs/<job_id> --keep-pick 4 # In edits/, keeps only clip_4 and deletes others
+python scripts/clean.py jobs/<job_id> --edits       # Purges exported clips from edits/ after uploading
+python scripts/clean.py --all                       # Cleans intermediate files across all jobs
+python scripts/clean.py --dry-run                   # Previews files to delete without modifying anything
 ```
 
 ---
